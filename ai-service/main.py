@@ -4,7 +4,7 @@ from triage_service import run_triage
 from summary_service import generate_summary
 from translate_service import translate_text
 
-app = FastAPI(title="Rural CareLink AI Service")
+app = FastAPI(title="Rural CarePath AI Service")
 
 @app.get("/")
 def read_root():
