@@ -1,0 +1,30 @@
+# Each entry has the same term in all three languages.
+# Add more rows here anytime — this is the only file you need to touch to expand vocabulary.
+
+MEDICAL_TERMS = [
+    {"english": "fever", "hindi": "बुखार", "marathi": "ताप"},
+    {"english": "cough", "hindi": "खांसी", "marathi": "खोकला"},
+    {"english": "headache", "hindi": "सिरदर्द", "marathi": "डोकेदुखी"},
+    {"english": "stomach pain", "hindi": "पेट दर्द", "marathi": "पोटदुखी"},
+    {"english": "difficulty breathing", "hindi": "सांस लेने में तकलीफ", "marathi": "श्वास घ्यायला त्रास"},
+    {"english": "chest pain", "hindi": "छाती में दर्द", "marathi": "छातीत दुखणे"},
+    {"english": "vomiting", "hindi": "उल्टी", "marathi": "उलटी"},
+    {"english": "nausea", "hindi": "जी मिचलाना", "marathi": "मळमळ"},
+    {"english": "dizziness", "hindi": "चक्कर आना", "marathi": "चक्कर येणे"},
+    {"english": "weakness", "hindi": "कमजोरी", "marathi": "अशक्तपणा"},
+    {"english": "body ache", "hindi": "शरीर में दर्द", "marathi": "अंगदुखी"},
+    {"english": "diarrhea", "hindi": "दस्त", "marathi": "जुलाब"},
+    {"english": "swelling", "hindi": "सूजन", "marathi": "सूज"},
+    {"english": "rash", "hindi": "चकत्ते", "marathi": "पुरळ"},
+    {"english": "back pain", "hindi": "पीठ दर्द", "marathi": "पाठदुखी"},
+    {"english": "joint pain", "hindi": "जोड़ों का दर्द", "marathi": "सांधेदुखी"},
+    {"english": "loss of appetite", "hindi": "भूख न लगना", "marathi": "भूक न लागणे"},
+    {"english": "fatigue", "hindi": "थकान", "marathi": "थकवा"},
+    {"english": "sore throat", "hindi": "गले में खराश", "marathi": "घसा खवखवणे"},
+    {"english": "cold", "hindi": "जुकाम", "marathi": "सर्दी"},
+    {"english": "diabetes", "hindi": "मधुमेह", "marathi": "मधुमेह"},
+    {"english": "hypertension", "hindi": "उच्च रक्तचाप", "marathi": "उच्च रक्तदाब"},
+    {"english": "pregnancy", "hindi": "गर्भावस्था", "marathi": "गर्भधारणा"},
+    {"english": "burning urination", "hindi": "पेशाब में जलन", "marathi": "लघवीत जळजळ"},
+    {"english": "blurred vision", "hindi": "धुंधला दिखना", "marathi": "अंधुक दिसणे"},
+]
