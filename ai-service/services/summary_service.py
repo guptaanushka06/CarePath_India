@@ -1,4 +1,4 @@
-from schemas import SummaryRequest, SummaryResponse
+from core.schemas import SummaryRequest, SummaryResponse
 
 def generate_summary(request: SummaryRequest) -> SummaryResponse:
     conditions_text = ", ".join(request.known_conditions) if request.known_conditions else "none reported"

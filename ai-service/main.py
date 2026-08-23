@@ -1,23 +1,16 @@
 from fastapi import FastAPI
-from schemas import TriageRequest, TriageResponse, SummaryRequest, SummaryResponse, TranslateRequest, TranslateResponse
-from triage_service import run_triage
-from summary_service import generate_summary
-from translate_service import translate_text
+from routers import triage, summary, translate
 
-app = FastAPI(title="Rural CarePath AI Service")
+app = FastAPI(
+    title="Rural CarePath AI Service",
+    description="AI-assisted triage, medical summary, and translation for the Rural CarePath healthcare platform.",
+    version="1.0.0"
+)
 
-@app.get("/")
+app.include_router(triage.router)
+app.include_router(summary.router)
+app.include_router(translate.router)
+
+@app.get("/", tags=["Health Check"])
 def read_root():
     return {"message": "AI service is running!"}
-
-@app.post("/triage", response_model=TriageResponse)
-def triage_endpoint(request: TriageRequest):
-    return run_triage(request)
-
-@app.post("/summarize", response_model=SummaryResponse)
-def summarize_endpoint(request: SummaryRequest):
-    return generate_summary(request)
-
-@app.post("/translate", response_model=TranslateResponse)
-def translate_endpoint(request: TranslateRequest):
-    return translate_text(request)

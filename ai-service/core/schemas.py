@@ -1,11 +1,11 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import List
 
 class TriageRequest(BaseModel):
-    age: int
-    symptoms: List[str]
-    existing_conditions: List[str] = []
-    duration_days: int = 1
+    age: int = Field(..., example=58)
+    symptoms: List[str] = Field(..., example=["chest discomfort", "difficulty breathing"])
+    existing_conditions: List[str] = Field(default=[], example=["diabetes", "hypertension"])
+    duration_days: int = Field(default=1, example=2)
 
 class TriageResponse(BaseModel):
     risk_level: str
@@ -27,7 +27,8 @@ class SummaryResponse(BaseModel):
 
 class TranslateRequest(BaseModel):
     text: str
-    source_language: str   # "marathi", "hindi", "english"
+    source_language: str   # "english", "hindi", or "marathi"
+    target_language: str = "english"   # "english", "hindi", or "marathi"
 
 class TranslateResponse(BaseModel):
     translated_text: str

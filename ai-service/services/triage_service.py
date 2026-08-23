@@ -1,5 +1,5 @@
-from schemas import TriageRequest, TriageResponse
-from safety_rules import evaluate_risk
+from core.schemas import TriageRequest, TriageResponse
+from core.safety_rules import evaluate_risk
 
 def run_triage(request: TriageRequest) -> TriageResponse:
     risk_level, red_flags, action, care_level = evaluate_risk(
