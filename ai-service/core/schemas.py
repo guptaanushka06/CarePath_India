@@ -1,18 +1,29 @@
 from pydantic import BaseModel, Field
-from typing import List
+from typing import List, Optional, Literal
+
+class VitalsInput(BaseModel):
+    spo2: Optional[int] = Field(default=None, example=94, description="Oxygen saturation %, e.g. 94")
+    temperature_celsius: Optional[float] = Field(default=None, example=38.5)
+    heart_rate: Optional[int] = Field(default=None, example=88, description="Beats per minute")
+    systolic_bp: Optional[int] = Field(default=None, example=160)
+    diastolic_bp: Optional[int] = Field(default=None, example=95)
 
 class TriageRequest(BaseModel):
-    age: int = Field(..., example=58)
+    age: int = Field(..., ge=0, le=120, example=58)
     symptoms: List[str] = Field(..., example=["chest discomfort", "difficulty breathing"])
     existing_conditions: List[str] = Field(default=[], example=["diabetes", "hypertension"])
-    duration_days: int = Field(default=1, example=2)
+    duration_days: int = Field(default=1, ge=0, le=365, example=2)
+    vitals: Optional[VitalsInput] = None
 
 class TriageResponse(BaseModel):
-    risk_level: str
+    risk_level: Literal["unknown", "low", "medium", "high", "critical"]
     red_flags: List[str]
+    vital_flags: List[str] = []
     recommended_action: str
     recommended_care_level: str
     disclaimer: str = "AI-assisted risk identification. This is not a medical diagnosis."
+    triage_source: str = "rule_based_v1"
+    uncertainty_note: Optional[str] = None
 
 class SummaryRequest(BaseModel):
     age: int
@@ -24,12 +35,14 @@ class SummaryRequest(BaseModel):
 
 class SummaryResponse(BaseModel):
     summary_text: str
+    source: Literal["llm", "template_fallback"]
 
 class TranslateRequest(BaseModel):
     text: str
-    source_language: str   # "english", "hindi", or "marathi"
-    target_language: str = "english"   # "english", "hindi", or "marathi"
+    source_language: str
+    target_language: str = "english"
 
 class TranslateResponse(BaseModel):
     translated_text: str
     target_language: str = "english"
+    original_text_preserved: str
