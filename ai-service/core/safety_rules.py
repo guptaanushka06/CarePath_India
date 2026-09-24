@@ -63,6 +63,12 @@ def evaluate_vitals(vitals) -> tuple[str, list[str]]:
         elif vitals.systolic_bp > 160:
             escalate("high", f"Blood pressure high ({vitals.systolic_bp} systolic)")
 
+    if vitals.diastolic_bp is not None:
+        if vitals.diastolic_bp > 120 or vitals.diastolic_bp < 60:
+            escalate("critical", f"Diastolic BP critically abnormal ({vitals.diastolic_bp})")
+        elif vitals.diastolic_bp > 100:
+            escalate("high", f"Diastolic BP high ({vitals.diastolic_bp})")        
+
     return (worst, flags)
 
 
@@ -86,7 +92,7 @@ def evaluate_risk(symptoms, existing_conditions, age, duration_days, vitals=None
     red_flags = []
     for symptom in symptoms_lower:
         for critical in CRITICAL_SYMPTOMS:
-            if critical in symptom:
+            if critical in symptom and symptom not in red_flags:
                 red_flags.append(symptom)
 
     vital_severity, vital_flags = evaluate_vitals(vitals)
@@ -101,8 +107,8 @@ def evaluate_risk(symptoms, existing_conditions, age, duration_days, vitals=None
             "district_hospital_or_emergency",
             None
         )
-
-    high_flags = [s for s in symptoms_lower if any(h in s for h in HIGH_RISK_SYMPTOMS)]
+    
+    high_flags = list(dict.fromkeys(s for s in symptoms_lower if any(h in s for h in HIGH_RISK_SYMPTOMS)))
     has_risky_condition = any(c in conditions_lower for c in HIGH_RISK_CONDITIONS)
     is_elderly = age >= 60
 
