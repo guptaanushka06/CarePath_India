@@ -47,3 +47,16 @@ class TranslateResponse(BaseModel):
     target_language: str = "english"
     original_text_preserved: str
     translation_source: Literal["dictionary", "llm", "untranslated_fallback", "unsupported_language"]
+
+class VoiceTriageRequest(BaseModel):
+    transcript: str = Field(..., example="mera chest mein do din se dard ho raha hai aur saans lene mein takleef hai")
+    language: Literal["english", "hindi", "marathi"] = "english"
+    age: Optional[int] = None
+    existing_conditions: List[str] = []
+    vitals: Optional[VitalsInput] = None
+
+class VoiceTriageResponse(BaseModel):
+    extracted_symptoms: List[str]
+    extraction_source: Literal["llm", "keyword_fallback", "none"]
+    extraction_note: str
+    triage: TriageResponse

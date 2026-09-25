@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
-from routers import triage, summary, translate
+from routers import triage, summary, translate, voice 
 from core.safety_rules import RULES_VERSION
 
 app = FastAPI(
@@ -13,6 +13,7 @@ app = FastAPI(
 app.include_router(triage.router)
 app.include_router(summary.router)
 app.include_router(translate.router)
+app.include_router(voice.router)
 
 @app.get("/", tags=["Health Check"])
 def read_root():
