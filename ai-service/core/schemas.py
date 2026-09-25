@@ -46,3 +46,4 @@ class TranslateResponse(BaseModel):
     translated_text: str
     target_language: str = "english"
     original_text_preserved: str
+    translation_source: Literal["dictionary", "llm", "untranslated_fallback", "unsupported_language"]
